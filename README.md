@@ -313,7 +313,7 @@ from scratch to demonstrate full-stack design, multi-tenancy, and production
 packaging.
 
 - GitHub: <https://github.com/AgilGuliyev1337>
-- LinkedIn: [<https://www.linkedin.com/in/AgilGuliyev1337](https://www.linkedin.com/in/agil-guliyev-5b0a86255/>](https://www.linkedin.com/in/agil-guliyev-5b0a86255/)
+- LinkedIn: <https://www.linkedin.com/in/agil-guliyev-5b0a86255/>
 
 ## License
 
