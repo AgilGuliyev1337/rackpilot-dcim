@@ -2,7 +2,7 @@
 
 Multi-tenant Data Center Infrastructure Management — track datacenters, rooms, racks and devices with an interactive rack elevation, a 2D floor plan, a 3D room view, full audit trail, and import/export.
 
-![CI](https://github.com/agilguliyev/rackpilot-dcim/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/AgilGuliyev1337/rackpilot-dcim/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
@@ -170,7 +170,7 @@ from the data.
 ## Quick start
 
 ```bash
-git clone https://github.com/agilguliyev/rackpilot-dcim.git
+git clone https://github.com/AgilGuliyev1337/rackpilot-dcim.git
 cd rackpilot-dcim
 cp .env.example .env
 
@@ -312,8 +312,8 @@ source-of-truth inventory and vCenter operations at a telecom operator — rebui
 from scratch to demonstrate full-stack design, multi-tenancy, and production
 packaging.
 
-- GitHub: <https://github.com/agilguliyev>
-- LinkedIn: <https://www.linkedin.com/in/agilguliyev>
+- GitHub: <https://github.com/AgilGuliyev1337>
+- LinkedIn: [<https://www.linkedin.com/in/AgilGuliyev1337](https://www.linkedin.com/in/agil-guliyev-5b0a86255/>](https://www.linkedin.com/in/agil-guliyev-5b0a86255/)
 
 ## License
 
