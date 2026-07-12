@@ -1,0 +1,7 @@
+[project]
+name = "rackpilot-dcim-backend"
+version = "1.0.0"
+description = "RackPilot DCIM — FastAPI backend"
+requires-python = ">=3.11"
+
+# pytest configuration lives in pytest.ini

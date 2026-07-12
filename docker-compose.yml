@@ -1,0 +1,70 @@
+name: rackpilot
+
+services:
+  db:
+    image: postgres:16
+    container_name: rackpilot-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-rackpilot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rackpilot}
+      POSTGRES_DB: ${POSTGRES_DB:-rackpilot}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rackpilot} -d ${POSTGRES_DB:-rackpilot}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - rackpilot
+
+  backend:
+    build: ./backend
+    container_name: rackpilot-backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://rackpilot:rackpilot@db:5432/rackpilot}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production-use-32-plus-bytes}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      REFRESH_TOKEN_EXPIRE_DAYS: ${REFRESH_TOKEN_EXPIRE_DAYS:-7}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-4o-mini}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/code
+      - uploads:/code/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - rackpilot
+
+  frontend:
+    image: node:20
+    container_name: rackpilot-frontend
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    environment:
+      VITE_PROXY_TARGET: http://backend:8000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - rackpilot
+
+networks:
+  rackpilot:
+    name: rackpilot-network
+
+volumes:
+  pgdata:
+  frontend_node_modules:
+  uploads:

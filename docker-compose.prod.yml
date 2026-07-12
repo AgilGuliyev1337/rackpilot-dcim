@@ -1,0 +1,65 @@
+name: rackpilot-prod
+
+services:
+  db:
+    image: postgres:16
+    container_name: rackpilot-prod-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?set in .env.production}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env.production}
+      POSTGRES_DB: ${POSTGRES_DB:?set in .env.production}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - rackpilot
+
+  backend:
+    build: ./backend
+    container_name: rackpilot-prod-backend
+    command: >
+      gunicorn app.main:app
+      --workers ${GUNICORN_WORKERS:-4}
+      --worker-class uvicorn.workers.UvicornWorker
+      --bind 0.0.0.0:8000
+      --access-logfile -
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET:?set in .env.production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      REFRESH_TOKEN_EXPIRE_DAYS: ${REFRESH_TOKEN_EXPIRE_DAYS:-7}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-4o-mini}
+    volumes:
+      - uploads:/code/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - rackpilot
+
+  frontend:
+    build: ./frontend
+    container_name: rackpilot-prod-frontend
+    ports:
+      - "${APP_PORT:-8080}:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - rackpilot
+
+networks:
+  rackpilot:
+    name: rackpilot-prod-network
+
+volumes:
+  pgdata:
+  uploads:

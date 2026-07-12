@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-surface-100 text-surface-900 dark:bg-surface-950 dark:text-surface-100;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.surface.400') transparent;
+  }
+  .dark * {
+    scrollbar-color: theme('colors.surface.600') transparent;
+  }
+}

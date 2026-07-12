@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Node
+node_modules/
+dist/
+*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Environment (never commit real secrets; keep the *.example templates)
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Backend uploads (device photos) — runtime data, not source
+backend/uploads/
+
+# Local backups
+backups/
