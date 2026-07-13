@@ -13,6 +13,9 @@ real Data Center Infrastructure Management (DCIM) tool: knowing what hardware yo
 own, where each unit is racked, how full your racks are, what is under warranty,
 and who changed what.
 
+Online Demo <https://rackpilot.agilguliyev.net/>
+
+
 ---
 
 ## Screenshots
