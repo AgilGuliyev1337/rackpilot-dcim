@@ -21,9 +21,9 @@ and who changed what.
 | --- | --- | --- |
 | ![Dashboard](docs/screenshots/dashboard.png) | ![Rack view](docs/screenshots/rack-view.png) | ![Floor plan](docs/screenshots/floorplan.png) |
 
-| 3D room view | Asset inventory | Audit trail |
+| 3D room view | Asset inventory | Reports|
 | --- | --- | --- |
-| ![3D view](docs/screenshots/3d-view.png) | ![Assets](docs/screenshots/assets.png) | ![Audit](docs/screenshots/audit.png) |
+| ![3D view](docs/screenshots/3d-view.png) | ![Assets](docs/screenshots/assets.png) | ![Audit](docs/screenshots/reports.png) |
 
 > Screenshots are placeholders in `docs/screenshots/` — capture the running app to
 > populate them. Worth capturing: the dashboard, a nearly-full rack elevation with a
